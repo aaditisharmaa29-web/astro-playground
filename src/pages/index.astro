@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Greeting from '../components/Greeting';
 
 const allPosts = Object.values(import.meta.glob('./posts/*.md', { eager: true })) as Array<{
   frontmatter: { tags?: string[] };
@@ -8,6 +9,8 @@ const tags = [...new Set(allPosts.flatMap((post) => post.frontmatter.tags ?? [])
 const pageTitle = 'Astro.props';
 ---
 <BaseLayout pageTitle={pageTitle}>
+	<h2>My awesome blog subtitle</h2>
+	<Greeting client:load messages={["Hej", "Hallo", "Hola", "Habari"]} />
   <div class="tags">
   {tags.map((tag) => (
       <p class="tag"><a href={`/tags/${tag}`}>{tag}</a></p>
