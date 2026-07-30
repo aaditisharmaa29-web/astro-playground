@@ -1,5 +1,10 @@
 ---
-const pageTitle = "About Aditi";
+
+import Header from '../components/Header.astro';
+import "../styles/global.css"
+const pageTitle = "Any Guesses?";
+import Footer from '../components/Footer.astro';
+
 const identity = {
   firstName: "Sarah",
   country: "Canada",
@@ -11,21 +16,44 @@ const skills = ["HTML", "CSS", "JavaScript", "React", "Astro", "Writing Docs"]
 const happy = true;
 const finished = false;
 const goal = 3;
+
+const skillColor = "crimson";
+const fontWeight = "bold"
+const textCase = "uppercase"
 ---
 
 <html lang="en">
 	<head>
+    <Header />
 		<meta charset="utf-8" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" href="/favicon.ico" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{pageTitle}</title>
+
+  <style define:vars={{skillColor, fontWeight, textCase}}>
+    h1 {
+      color: rgb(180, 40, 40);
+      font-size: 4rem;
+    }
+
+    .skill {
+    color: var(--skillColor);
+    font-weight: var(--fontWeight);
+    text-transform: var(--textCase);
+  }
+  </style>
+      
 	</head>
 	<body>
 		<h1>{pageTitle}</h1>
-    <h2>... and my new Astro site!</h2>
-    <p>Here are a few facts about me:</p>
+    <h2>She makes us, the viewer feeel a part of her life!</h2>
+    <p>Plus the entire cast is british ;)</p>
+    <p>Cast:</p>
+<ul>
+  {skills.map((skill) => <li class="skill">{skill}</li>)}
+</ul>
 <ul>
   <li>My name is {identity.firstName}.</li>
   <li>I live in {identity.country} and I work as a {identity.occupation}.</li>
@@ -37,9 +65,8 @@ const goal = 3;
 <ul>
   {skills.map((skill) => <li>{skill}</li>)}
 </ul>
-    <a href="/">Home</a>
-    <a href="/about/">About</a>
-    <a href="/blog/">Blog</a>
+
+<Footer />
 
 	</body>
 </html>
